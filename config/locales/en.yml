@@ -1,0 +1,17 @@
+en:
+  exception_logger:
+    logged_exceptions:
+      index:
+        title: Logged Exceptions
+        filters: Filters
+        latest_exceptions: Latest Exceptions
+        exception: Exception
+        controller_action: Controller / Action
+        dates: Dates
+        today: Today
+        last_few_days: Last few days
+        last_7_days: Last 7 days
+        last_30_days: Last 30 days
+      show:
+        title: Logged Exception
+

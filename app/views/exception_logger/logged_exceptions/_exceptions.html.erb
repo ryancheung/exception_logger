@@ -1,0 +1,31 @@
+<div id="exceptions">
+  <div class="pages">
+    <%= link_to 'Delete Visible', { :action => 'destroy_all' }.merge(params_filters), :class => 'delete_visible_link' %>
+    <strong><%= will_paginate @exceptions, params: { controller: "logged_exceptions", action: "index" }.merge(params_filters), style: 'display:inline' %></strong>
+  </div>
+  <h1>Exceptions <%= raw "<span>(filtered)</span>" if filtered? %> </h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Exception</th>
+        <th>Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @exceptions.each do |exception| %>
+        <tr id="<%= dom_id(exception) %>" class="<%= cycle("eor", "") %> exception">
+          <td>
+            <div class="expclass"><%= link_to exception.name, {:action => "show", :id => exception}, :class => 'show_link' %></div>
+            <span class="message"><%= h exception.message %></span>
+          </td>
+          <td class="time"><%= pretty_exception_date(exception) %></td>
+          <td><%= link_to 'Delete', { :action => 'destroy', :id => exception }, :class => "util delete_link" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+   <div class="pages pages-bottom">
+     <strong><%= will_paginate @exceptions, params: { controller: "logged_exceptions", action: "index" }.merge(params_filters), style: 'display:inline' %></strong>
+   </div>
+</div> <!-- #exceptions -->

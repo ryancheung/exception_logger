@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <%= csrf_meta_tag %>
+    <title><%= yield(:title) || "Exception Logger" %></title>
+
+    <%= stylesheet_link_tag "exception_logger/application" %>
+
+    <%= auto_discovery_link_tag(:rss, {:action => "feed"}, {:title => "RSS Feed"}) %>
+  </head>
+  <body>
+    <div id="container">
+      <%= yield %>
+    </div>
+    <br style="clear:both" />
+
+    <%= javascript_include_tag "exception_logger/application" %>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<div class="tools">
+  <%= link_to 'Delete', { :action => 'destroy', :id => @exception }, :class => "util delete_link" %>
+  <span class="pipe">|</span>
+  <%= link_to "Close", "#", :class => "util close_link" %>
+</div>
+
+<div class="date">
+  <%= @exception.created_at.strftime(Time::DATE_FORMATS[:exc_full]) %>
+</div>
+<h1><%= @exception.name %></h1>
+
+<h2>Request</h2>
+<%= pretty_format(@exception.request) %>
+
+<h2>Backtrace</h2>
+<%= simple_format @exception.message %>
+
+<div id="backtrace">
+  <%= raw @exception.backtrace.gsub(/\n/,"<br />") %>
+</div>
+
+<h2>Environment</h2>
+<%= pretty_format(@exception.environment) %>
