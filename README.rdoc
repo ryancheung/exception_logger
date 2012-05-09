@@ -27,7 +27,7 @@ Please check if all those requirements are satisfied on your environment.
 
 === Inside your config/routes.rb
 
-  mount ExceptionLogger::Engine => "/logger"
+  mount ExceptionLogger::Engine => "/exception_logger"
 
 === Database Setup
 
