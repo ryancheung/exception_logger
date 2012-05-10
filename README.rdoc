@@ -74,4 +74,56 @@ and (if you use declarative_authorization) add this to your authorization_rules.
 
 Not implemented yet.
 
+== Usage
+
+To localize the interface:
+
+  en:
+    exception_logger:
+      logged_exceptions:
+        index:
+          title: Logged Exceptions
+          filters: Filters
+          latest_exceptions: Latest Exceptions
+          exception: Exception
+          controller_action: Controller / Action
+          dates: Dates
+          today: Today
+          last_few_days: Last few days
+          last_7_days: Last 7 days
+          last_30_days: Last 30 days
+        show:
+          title: Logged Exception
+
+To log extra data, in your ApplicationController:
+
+  self.exception_data = Proc.new { "Extra exception infomation here!" }
+
+  or
+
+  self.exception_data = :extra_exception_data
+
+  def extra_exception_data
+    "Extra exception infomation here!"
+  end
+
+To add authentication, in config/application.rb or the specific environment file:
+
+  # set up authencation of exception_logger
+  config.after_initialize do
+    ExceptionLogger::LoggedExceptionsController.class_eval do
+      before_filter :authorize
+
+      protected
+
+      def authorize
+        redirect_to main_app.admin_login_path unless admin_loggined?
+      end
+
+      def admin_loggined?
+        session[:admin_user_id].present?
+      end
+    end
+  end
+
 This project rocks and uses MIT-LICENSE.
