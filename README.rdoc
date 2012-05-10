@@ -133,5 +133,3 @@ MIT License. See LICENSE for details.
 ==Copyright
 
 Copyright (c) 2012 Ryan Cheung and Shanghai Boohee Information Technology Co. Ltd.
-
-This project rocks and uses MIT-LICENSE.
