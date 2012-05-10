@@ -97,9 +97,9 @@ To localize the interface:
 
 To log extra data, in your ApplicationController:
 
-  self.exception_data = Proc.new { "Extra exception infomation here!" }
+  self.exception_data = Proc.new { |controller| "Extra exception infomation here!" }
 
-  or
+or
 
   self.exception_data = :extra_exception_data
 
