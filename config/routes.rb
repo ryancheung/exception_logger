@@ -8,5 +8,5 @@ ExceptionLogger::Engine.routes.draw do
     end
   end
 
-  root to: 'logged_exceptions#index'
+  root :to => 'logged_exceptions#index'
 end
