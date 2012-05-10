@@ -37,7 +37,7 @@ module ExceptionLogger
         exceptions = exceptions.by_controller(controller_filter)
         exceptions = exceptions.by_action(action_filter)
       end
-      @exceptions = exceptions.paginate(page: params[:page], per_page: 30)
+      @exceptions = exceptions.paginate(:page => params[:page], :per_page => 30)
 
       respond_to do |format|
         format.html { redirect_to :action => 'index' unless action_name == 'index' }
@@ -76,10 +76,10 @@ module ExceptionLogger
 
     def params_filters
       {
-        query: params[:query],
-        date_ranges_filter: params[:date_ranges_filter],
-        exception_names_filter: params[:exception_names_filter],
-        controller_actions_filter: params[:controller_actions_filter],
+        :query => params[:query],
+        :date_ranges_filter => params[:date_ranges_filter],
+        :exception_names_filter => params[:exception_names_filter],
+        :controller_actions_filter => params[:controller_actions_filter],
       }
     end
 
