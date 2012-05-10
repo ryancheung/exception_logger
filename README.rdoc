@@ -17,7 +17,7 @@ and then run:
 
 Please check if all those requirements are satisfied on your environment.
 
-* will_paginate >= 3.0.pre2 # (used for pagination)
+* will_paginate >= 3.0.3 # (used for pagination)
 * rails >= 3.2.1
 
 === Inside your ApplicationController:
@@ -40,6 +40,10 @@ This will create a database migration
   TIMESTAMP_create_exception_logger_logged_exceptions.exception_logger.rb
 
 inside db/migrations
+
+Then
+
+  rake db:migrate
 
 == Authentication
 
