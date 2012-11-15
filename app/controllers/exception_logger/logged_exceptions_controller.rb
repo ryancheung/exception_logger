@@ -72,6 +72,11 @@ module ExceptionLogger
       query
     end
 
+    def clear
+      LoggedException.delete_all
+      redirect_to :back
+    end
+
     private
 
     def params_filters
