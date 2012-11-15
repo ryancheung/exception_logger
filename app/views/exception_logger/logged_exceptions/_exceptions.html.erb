@@ -1,5 +1,6 @@
 <div id="exceptions">
   <div class="pages">
+    <%= link_to('Clear History', {:action => :clear}, :confirm => "are you sure?", :method => :post) %>
     <%= link_to 'Delete Visible', { :action => 'destroy_all' }.merge(params_filters), :class => 'delete_visible_link' %>
     <strong><%= will_paginate @exceptions, :params => { :controller => "logged_exceptions", :action => "index" }.merge(params_filters), :style => 'display:inline' %></strong>
   </div>
