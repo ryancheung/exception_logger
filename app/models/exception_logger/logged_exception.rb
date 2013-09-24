@@ -1,6 +1,5 @@
 module ExceptionLogger
   class LoggedException < ActiveRecord::Base
-	attr_accessible :exception_class, :controller_name, :action_name, :message, :backtrace, :request
     class << self
       def create_from_exception(controller, exception, data)
         message = exception.message.inspect
@@ -25,7 +24,7 @@ module ExceptionLogger
     scope :by_action, lambda {|action_name| where(:action_name => action_name)}
     scope :message_like, lambda {|query|  where('message like ?', "%#{query}%")}
     scope :days_old, lambda {|day_number| where('created_at >= ?', day_number.to_f.days.ago.utc)}
-    scope :sorted, order('created_at DESC')
+    scope :sorted, lambda { order('created_at DESC') }
 
     def name
       "#{self.exception_class} in #{self.controller_action}"

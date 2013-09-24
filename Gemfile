@@ -1,4 +1,4 @@
-source "http://rubygems.org"
+source "http://ruby.taobao.org"
 
 # Declare your gem's dependencies in exception_logger.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -15,3 +15,7 @@ gem "jquery-rails"
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+
+gem 'pry', require: false
+gem 'pry-debugger'
+gem 'pry-rails'
