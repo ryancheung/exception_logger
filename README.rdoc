@@ -54,7 +54,7 @@ Example uses the declarative_authorization gem
 in config/environment/production.rb:
 
   config.after_initialize do
-    LoggedExceptionsController.class_eval do
+    ExceptionLogger::LoggedExceptionsController.class_eval do
       # include any custom auth modules you need
       # (declarative authorization gem used)
       filter_resource_access
