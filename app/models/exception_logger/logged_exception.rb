@@ -1,6 +1,7 @@
 module ExceptionLogger
   class LoggedException < ActiveRecord::Base
     self.table_name = "logged_exceptions"
+    HOSTNAME = `hostname -s`.chomp
     class << self
       def create_from_exception(controller, exception, data)
         message = exception.message.inspect
@@ -15,7 +16,7 @@ module ExceptionLogger
       end
 
       def host_name
-        `hostname -s`.chomp
+        HOSTNAME
       end
     end
 
