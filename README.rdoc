@@ -1,7 +1,7 @@
 = Exception Logger for Rails 4.0.x
 
-This gem is evolved from the outdated exception_logger gem. I refined it with the mountable rails engine. That make it conveniet to
-mount it to any existing rails app.
+This gem is evolved from the outdated exception_logger gem. I refined it with the mountable rails engine, making it convenient to
+mount to any existing rails app.
 
 == Install
 
