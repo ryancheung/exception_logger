@@ -54,15 +54,20 @@ module ExceptionLogger
       super
     end
 
-    def log_exception(exception)
-      deliverer = self.class.exception_data
-      data = case deliverer
-      when nil    then {}
-      when Symbol then send(deliverer)
-      when Proc   then deliverer.call(self)
-      end
-
-      LoggedException.create_from_exception(self, exception, data)
+  def log_exception(exception)
+    report = LoggedException.create_from_exception(
+      exception,
+      {},
+      :request         => request,
+      :controller_name => self.controller_name,
+      :action_name     => self.action_name
+    )
+    Rails.logger.error exception.message
+    Rails.logger.error exception.backtrace.join("\n")
+    if Rails.env.development?
+      `notify-send "#{report.exception_name}" "#{report.exception_message}" -t 2000`
     end
+    report
+  end
   end
 end
