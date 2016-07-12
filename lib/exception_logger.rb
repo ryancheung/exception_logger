@@ -54,13 +54,34 @@ module ExceptionLogger
       super
     end
 
+    def filter_sub_parameters(params, rails_filter_parameters)
+      params.each do |key, value|
+        if(value.class != Hash and value.class != ActiveSupport::HashWithIndifferentAccess)
+          params[key] = '[FILTERED]' if rails_filter_parameters.include?(key.to_sym)
+        else
+          params[key] = filter_sub_parameters(value)
+        end
+      end
+      params
+    end
+
     def log_exception(exception)
       deliverer = self.class.exception_data
       data = case deliverer
-      when nil    then {}
-      when Symbol then send(deliverer)
-      when Proc   then deliverer.call(self)
-      end
+               when nil    then {}
+               when Symbol then send(deliverer)
+               when Proc   then deliverer.call(self)
+             end
+
+      rails_filter_parameters = defined?(::Rails) ? ::Rails.application.config.filter_parameters : []
+
+      self.request.parameters.each do |key, value|
+        if(value.class != Hash and value.class != ActiveSupport::HashWithIndifferentAccess)
+          self.request.parameters[key] = '[FILTERED]' if rails_filter_parameters.include?(key.to_sym)
+        else
+          self.request.parameters[key] = filter_sub_parameters(value, rails_filter_parameters)
+        end
+      end if rails_filter_parameters.any?
 
       LoggedException.create_from_exception(self, exception, data)
     end
